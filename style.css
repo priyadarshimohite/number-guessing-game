@@ -1,0 +1,555 @@
+/* =========================
+   GLOBAL
+========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            font-family: Arial, sans-serif;
+            color: #fff;
+
+            background:
+                radial-gradient(circle at top, #263238, #121212 65%);
+        }
+
+
+        /* =========================
+   GAME CARD
+========================= */
+
+        #game {
+            width: 100%;
+            max-width: 430px;
+            padding: 30px 25px;
+
+            text-align: center;
+
+            background: rgba(25, 25, 25, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.6),
+                0 0 25px rgba(0, 229, 255, 0.08);
+
+            animation: cardAppear 0.5s ease;
+        }
+
+
+        /* =========================
+   TITLE
+========================= */
+
+        #title {
+            margin: 0 0 25px;
+
+            font-size: 30px;
+            font-weight: 800;
+
+            color: #00e5ff;
+
+            text-shadow:
+                0 0 5px #00e5ff,
+                0 0 15px rgba(0, 229, 255, 0.6);
+        }
+
+
+        /* =========================
+   NUMBER INPUT
+========================= */
+
+        #numberInput {
+            min-height: 55px;
+            margin: 15px auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 10px;
+
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+
+            background: #111827;
+
+            border: 2px solid #00e5ff;
+            border-radius: 12px;
+
+            box-shadow:
+                inset 0 0 10px rgba(0, 229, 255, 0.15),
+                0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+
+        /* =========================
+   GAME INFORMATION
+========================= */
+
+        #enteredNumbers {
+            display: block;
+
+            margin: 15px 0;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            color: #ffd740;
+
+            text-shadow:
+                0 0 6px rgba(255, 215, 64, 0.6);
+        }
+
+        #attempts {
+            color: #ff4d9d;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            text-shadow:
+                0 0 8px rgba(255, 77, 157, 0.6);
+        }
+
+
+        /* =========================
+   RESULT
+========================= */
+
+        #result {
+            min-height: 65px;
+            margin: 20px 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 12px 15px;
+
+            text-align: center;
+
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+
+            color: #ffffff;
+
+            background: rgba(0, 0, 0, 0.45);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+
+            /* Makes text clearly visible */
+            text-shadow:
+                0 2px 4px #000,
+                0 0 6px rgba(255, 255, 255, 0.4);
+
+            transition:
+                color 0.3s ease,
+                background 0.3s ease,
+                border 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        /* =========================
+   NORMAL RESULT
+========================= */
+
+        #result:not(:empty) {
+            color: #00e5ff;
+
+            text-shadow:
+                0 2px 4px #000,
+                0 0 8px rgba(0, 229, 255, 0.8);
+        }
+
+
+        /* =========================
+   DIGIT KEYPAD
+========================= */
+
+        #digits {
+            display: grid;
+
+            grid-template-columns: repeat(5, 1fr);
+
+            gap: 10px;
+
+            margin: 20px 0;
+        }
+
+
+        /* Digit buttons */
+
+        #digits button {
+            height: 55px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+
+            background:
+                linear-gradient(145deg, #303030, #181818);
+
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 10px rgba(0, 0, 0, 0.4);
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                background 0.15s ease;
+        }
+
+
+        /* Hover */
+
+        #digits button:hover:not(:disabled) {
+            transform: translateY(-3px);
+
+            background:
+                linear-gradient(145deg, #424242, #202020);
+
+            box-shadow:
+                0 7px 15px rgba(0, 229, 255, 0.2);
+        }
+
+
+        /* Click */
+
+        #digits button:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+
+        /* Disabled */
+
+        #digits button:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+   CLEAR + SUBMIT
+========================= */
+
+        #game>div:last-of-type {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        #clearButton,
+        #submitButton {
+            flex: 1;
+
+            min-height: 50px;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+
+        /* Clear */
+
+        #clearButton {
+            background: linear-gradient(135deg, #d32f2f, #8e0000);
+
+            box-shadow:
+                0 5px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        #clearButton:hover:not(:disabled) {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(211, 47, 47, 0.5);
+        }
+
+
+        /* Submit */
+
+        #submitButton {
+            background: linear-gradient(135deg, #1976d2, #004ba0);
+
+            box-shadow:
+                0 5px 15px rgba(25, 118, 210, 0.3);
+        }
+
+        #submitButton:hover:not(:disabled) {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(25, 118, 210, 0.5);
+        }
+
+
+        /* Disabled controls */
+
+        #clearButton:disabled,
+        #submitButton:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+   START AGAIN BUTTON
+========================= */
+
+        #game>button {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(135deg, #7b1fa2, #512da8);
+
+            color: #ffffff;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 18px rgba(123, 31, 162, 0.4);
+
+            animation: startAgainAppear 0.4s ease;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        #game>button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 9px 25px rgba(123, 31, 162, 0.6);
+        }
+
+
+        /* =========================
+   WIN STATE
+========================= */
+
+        body.win #game {
+            border-color: rgba(0, 255, 136, 0.6);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(0, 255, 136, 0.3);
+
+            animation: winGlow 1s ease;
+        }
+
+
+        body.win #result {
+            color: #00ff88;
+
+            background: rgba(0, 255, 136, 0.08);
+
+            border-color: rgba(0, 255, 136, 0.5);
+
+            text-shadow:
+                0 2px 4px #000,
+                0 0 8px #00ff88,
+                0 0 18px rgba(0, 255, 136, 0.7);
+
+            box-shadow:
+                0 0 15px rgba(0, 255, 136, 0.15);
+
+            animation: winText 0.8s ease;
+        }
+
+
+        /* =========================
+   LOSE STATE
+========================= */
+
+        body.lose #game {
+            border-color: rgba(255, 77, 109, 0.6);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(255, 77, 109, 0.3);
+
+            animation: loseShake 0.5s ease;
+        }
+
+
+        body.lose #result {
+            color: #ff4d6d;
+
+            background: rgba(255, 77, 109, 0.08);
+
+            border-color: rgba(255, 77, 109, 0.5);
+
+            text-shadow:
+                0 2px 4px #000,
+                0 0 8px #ff4d6d,
+                0 0 18px rgba(255, 77, 109, 0.7);
+
+            box-shadow:
+                0 0 15px rgba(255, 77, 109, 0.15);
+
+            animation: loseText 0.6s ease;
+        }
+
+
+        /* =========================
+   ANIMATIONS
+========================= */
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        @keyframes winGlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+
+        @keyframes winText {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes loseShake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+
+            75% {
+                transform: translateX(-4px);
+            }
+        }
+
+
+        @keyframes loseText {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes startAgainAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================
+   MOBILE
+========================= */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 12px;
+            }
+
+            #game {
+                padding: 25px 18px;
+            }
+
+            #title {
+                font-size: 25px;
+            }
+
+            #digits {
+                gap: 8px;
+            }
+
+            #digits button {
+                height: 50px;
+                font-size: 18px;
+            }
+
+            #result {
+                font-size: 16px;
+                min-height: 60px;
+            }
+        }
